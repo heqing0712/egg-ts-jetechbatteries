@@ -54,9 +54,10 @@ export default class UeditorService extends BaseService {
             files.push({ url, mtime });
           }
         });
+        const _start = Number(start)
 
         return {
-            list: files.slice(start, start + config[actionName + 'ManagerListSize']),
+            list: files.slice(_start, _start + config[actionName + 'ManagerListSize']),
             start,
             total: files.length,
             state: 'SUCCESS',
