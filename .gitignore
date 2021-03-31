@@ -10,10 +10,9 @@ logs/
 *.swp
 *.lock
 .github
+
 !.autod.conf.js
 package-lock.json
-
-app/**/*.js
 test/**/*.js
 config/**/*.js
 app/**/*.map
