@@ -10,7 +10,6 @@ logs/
 *.swp
 *.lock
 .github
-#*.js
 !.autod.conf.js
 package-lock.json
 
