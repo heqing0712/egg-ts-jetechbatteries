@@ -3,15 +3,15 @@ import * as _ from 'lodash';
 
 // 无需token的地址
 const noTokenUrl = [
-  '/admin/captcha/img',
-  '/admin/login',
-  '/admin/editor/ueditor'
+  '/api/admin/captcha/img',
+  '/api/admin/login',
+  '/api/admin/editor/ueditor'
 ];
 
 const noPermUrl = [
-  '/admin/permmenu',
-  '/admin/person',
-  '/admin/logout',
+  '/api/admin/permmenu',
+  '/api/admin/person',
+  '/api/admin/logout',
 ];
 
 
@@ -27,7 +27,7 @@ export default function AdminAuthority(): any {
     const checkPerm = false
 
     const token = ctx.get('Authorization');
-    if (_.startsWith(url, '/admin')) {
+    if (_.startsWith(url, '/api/admin')) {
       if (noTokenUrl.includes(url.split('?')[0])) {
         await next();
         return;

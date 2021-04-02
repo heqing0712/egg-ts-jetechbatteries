@@ -94,7 +94,7 @@ export function Route(url: string, method: HttpMethod, validator?: Validator, be
 }
 
 
-const PREFIX_ADMIN = '/admin';
+const PREFIX_ADMIN = '/api/admin';
 /**
  * 自动添加/admin前缀的Url路由装饰器
  * 例如 url 为 /sys/user/add, 使用该装饰器可直接变为/admin/sys/user/add
