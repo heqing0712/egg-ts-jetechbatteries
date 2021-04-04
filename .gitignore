@@ -9,10 +9,11 @@ logs/
 .vscode
 *.swp
 *.lock
-.github
-
+#*.js
 !.autod.conf.js
 package-lock.json
+
+app/**/*.js
 test/**/*.js
 config/**/*.js
 app/**/*.map
