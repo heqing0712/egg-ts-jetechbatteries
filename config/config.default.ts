@@ -85,7 +85,10 @@ export default (appInfo: EggAppInfo) => {
     },
   };
 
-
+  config.cors = {
+    origin:'*',
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH'
+  };
   
   // bull config
   config.bull = {
