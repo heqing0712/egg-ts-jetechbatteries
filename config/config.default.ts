@@ -77,10 +77,10 @@ export default (appInfo: EggAppInfo) => {
   // https://eggjs.org/zh-cn/core/security.html
   config.security = {
     // 配合egg-cors使用
-    // domainWhiteList: [ 'http://localhost:7003' ],
+    domainWhiteList: [ 'https://vue-admin-9girha1607536ebb-1258100541.tcloudbaseapp.com' ],
     csrf: {
       // 默认为 false，当设置为 true 时，将会放过所有 content-type 为 `application/json` 的请求
-      enable: false,
+      enable: true,
       ignoreJSON: true,
     },
   };
@@ -112,10 +112,6 @@ export default (appInfo: EggAppInfo) => {
    * CORS
    * https://github.com/eggjs/egg-cors
    */
-  config.cors = {
-    // origin: '*',
-    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
-  };
 
   // 模板渲染配置
   config.view = {
@@ -182,7 +178,10 @@ export default (appInfo: EggAppInfo) => {
     // },
   };
 
-
+  exports.cors = {
+    enable: true,
+    package: 'egg-cors'
+  }
     /**
    * typeorm 配置
    * 文档：https://www.npmjs.com/package/egg-ts-typeorm
