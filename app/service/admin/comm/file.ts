@@ -96,7 +96,7 @@ export default class FileService extends BaseService {
         // 返回文件信息
         return {
             fileName: file.filename,
-            url: '/'+filePath.replace(/\\/g,'/')
+            url:Config.baseUrl + '/'+filePath.replace(/\\/g,'/')
         }
     }
 
