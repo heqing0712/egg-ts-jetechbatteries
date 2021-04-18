@@ -10,7 +10,7 @@ import { Expose ,Type} from 'class-transformer';
 import { PageGetDto ,CreateBaseDto} from '../../comm';
 
 
-export class CreatePageDto extends CreateBaseDto {
+export class CreateFaqDto extends CreateBaseDto {
 
     @IsString()
     @Expose()
@@ -22,21 +22,17 @@ export class CreatePageDto extends CreateBaseDto {
 
     @Allow()
     @Expose()
-    scontent: string;
-
-    @Allow()
-    @Expose()
     identifier:string;
- 
+
 }
 
-export class UpdatePageDto extends CreatePageDto {
+export class UpdateFaqDto extends CreateFaqDto {
     @IsInt()
     @Expose()
     id: number;
 }
 
-export class QueryPageDto extends PageGetDto {
+export class QueryFaqDto extends PageGetDto {
     
     @Allow()
     @Expose()
@@ -49,36 +45,23 @@ export class QueryPageDto extends PageGetDto {
     @Allow()
     @Expose()
     uuid: string;
-
+    
     @IsOptional()
     @Allow()
     @Type(() => Number)
     @Expose()
     id: number;
-
-    @Allow()
-    @Expose()
-    identifier:string;
 }
 
-export class DeletePageDto {
+export class DeleteFaqDto {
     @ArrayNotEmpty()
     @Expose()
     ids: number[];
   }
 
-  export class InfoPageDto {
-
-
-    @IsOptional()
-    @Allow()
+  export class InfoFaqDto {
+    @IsInt()
     @Type(() => Number)
-    @Allow()
     @Expose()
     id: number;
-
-    
-    @Allow()
-    @Expose()
-    identifier:string;
   }
