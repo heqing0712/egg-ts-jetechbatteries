@@ -12,6 +12,7 @@ import { QueryHomeDto } from '../../dto/admin/shop/home';
 import { CreateMessageDto } from '../../dto/admin/shop/Message';
 import { InfoCaseDto, InfoCasexDto, QueryCaseDto } from '../../dto/admin/shop/case';
 import { QueryCaseClassDto } from '../../dto/admin/shop/case_class';
+import { QueryFaqDto } from '../../dto/admin/shop/faq';
  
 
 export default class AppController extends BaseController {
@@ -96,6 +97,19 @@ export default class AppController extends BaseController {
       data: result
     });
   }
+
+  @Route('/api/web/faq/list', 'get')
+  async getFaq(){
+    const dto = await this.ctx.validate<QueryFaqDto>(QueryFaqDto, this.getQuery());
+    if(!dto.lang){
+      dto.lang="en"
+    }
+    const result = await this.service.admin.shop.faq.list(dto)
+    this.res({
+      data: result
+    });
+  }
+
 
   @Route('/api/web/home/list', 'get')
   async getHomeList(){
@@ -192,6 +206,7 @@ export default class AppController extends BaseController {
     });
   }
 
+
   @Route('/api/web/case/', 'get')
   async getCase(){
     const dto = await this.ctx.validate<InfoCaseDto>(InfoCaseDto, this.getQuery());
@@ -229,7 +244,7 @@ export default class AppController extends BaseController {
   @Route('/api/web/page', 'get')
   async getPage(){
     const dto = await this.ctx.validate<InfoPageDto>(InfoPageDto, this.getQuery());
-    const result = await this.service.admin.shop.page.info(dto.id)
+    const result = await this.service.admin.shop.page.info(dto)
     this.res({
       data: result
     });

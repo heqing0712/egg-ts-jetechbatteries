@@ -1,6 +1,6 @@
 import BaseService from '../../base';
 import * as _ from 'lodash';
-import { CreatePageDto, QueryPageDto, UpdatePageDto } from '../../../dto/admin/shop/page';
+import { CreatePageDto, InfoPageDto, QueryPageDto, UpdatePageDto } from '../../../dto/admin/shop/page';
 // import { In } from 'typeorm';
 
 /**
@@ -39,7 +39,7 @@ export default class ShopPageService extends BaseService {
     const result = await this.getRepo().admin.shop.Page.createQueryBuilder('page')
       .where( title ?  `page.title like '%${title}%'` : '1 = 1')
       .andWhere( id ?  `page.id = ${id}` : '1 = 1')
-      .andWhere( uuid ?  `page.uuid = ${uuid}` : '1 = 1')
+      .andWhere( uuid ?  `page.uuid = ${uuid}` : '1 = 1') 
       .andWhere( lang ?  `page.lang = '${lang}'` : '1 = 1')
       .andWhere( startTime? `page.createTime >= '${startTime}'` : '1 = 1')
       .andWhere( endTime? `page.createTime <= '${endTime}'` : '1 = 1')
@@ -69,13 +69,17 @@ export default class ShopPageService extends BaseService {
    * 信息
    * @param id
    */
-  async info(id: number) {
-    const model: any = await this.getRepo().admin.shop.Page.findOne(id);
+  async info(query:InfoPageDto) {
+    const _query = query.id?  {id:query.id}:{identifier:query.identifier}
+    const model: any = await this.getRepo().admin.shop.Page.findOne(_query);
     if (_.isEmpty(model)) {
       throw new Error('内容id有误');
     }
     return { ...model };
   }
+
+  
+
 
 
 }

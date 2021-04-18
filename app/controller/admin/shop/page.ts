@@ -86,7 +86,7 @@ export default class ShopPageController extends BaseController {
   async info() {
     const dto = await this.ctx.validate<InfoPageDto>(InfoPageDto, this.getQuery());
  
-    const result = await this.service.admin.shop.page.info(dto.id)
+    const result = await this.service.admin.shop.page.info(dto)
     this.res({
       data: result
     })

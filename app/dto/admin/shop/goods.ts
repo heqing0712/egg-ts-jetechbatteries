@@ -4,7 +4,8 @@ import {
     Allow,
     IsString,
     Min,
-    ArrayNotEmpty
+    ArrayNotEmpty,
+    IsOptional
 } from 'class-validator';
 import { Expose, Type } from 'class-transformer';
 import { PageGetDto, CreateBaseDto } from '../../comm';
@@ -77,6 +78,11 @@ export class CreateGoodsDto extends CreateBaseDto {
     @Expose()
     hits: number;
 
+    @Allow()
+    @Type(() => Number)
+    @Expose()
+    hot: number;
+
 }
 
 
@@ -104,6 +110,12 @@ export class QueryGoodsDto extends PageGetDto {
     @Allow()
     @Expose()
     goodsClassUrl: string;
+
+    @IsOptional()
+    @Allow()
+    @Type(() => Number)
+    @Expose()
+    hot: number;
 }
 
 export class DeleteGoodsDto {
@@ -120,8 +132,6 @@ export class InfoGoodsDto {
 
 }
 export class InfoGoodsxDto {
-
-
     @Allow()
     @Expose()
     url: string;
@@ -169,4 +179,11 @@ export class smallGoodsDto extends CreateBaseDto {
     @Allow()
     @Expose()
     url: string;
+
+      
+    @IsOptional()
+    @Allow()
+    @Type(() => Number)
+    @Expose()
+    hot: number;
 }

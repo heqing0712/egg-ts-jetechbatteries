@@ -55,6 +55,8 @@ export default class ShopGoods extends ShopBaseEntity {
   hits: number;
 
   
+  @Column({  type: 'int',  default: 0 })
+  hot: number;
 
 }
 

@@ -45,6 +45,7 @@ export default class ShopGoodsService extends BaseService {
       .andWhere( endTime? `goods.createTime <= '${endTime}'` : '1 = 1')
       .andWhere( status>-1? `goods.status = ${status}` : '1 = 1')
       .orderBy({
+        'goods.hot':'DESC',
         'goods.sort':'ASC',
         'goods.id': 'DESC'
       })
@@ -59,11 +60,12 @@ export default class ShopGoodsService extends BaseService {
    * 所有
    */
   async list(query:QueryGoodsDto) {
-    const {lang,categoryId,title} = query
+    const {lang,categoryId,title,hot} = query
      let result = await this.getRepo().admin.shop.Goods.createQueryBuilder('goods')
       .where('goods.status = 1')
       .andWhere(categoryId?  `goods.categoryId = ${categoryId}` : '1 = 1')
       .andWhere( title ?  `goods.title like '%${title}%'` : '1 = 1')
+      .andWhere( hot!==undefined?  `goods.hot = ${hot}` : '1 = 1')
       .andWhere( lang?  `goods.lang = '${lang}'` : '1 = 1')
       .orderBy({
         'goods.sort':'ASC',
