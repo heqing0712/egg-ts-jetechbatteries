@@ -49,7 +49,7 @@ export default class UeditorService extends BaseService {
         const files:object[] = [];
         eachFileSync(path.join(publicDir, config[actionName + 'ManagerListPath']), (file, stat) => {
           if (config[actionName + 'ManagerAllowFiles'].includes(getSuffix(file))) {
-            const url:string = '/' + file.replace(/\\/g, '\/');
+            const url:string =  config.baseUrl +'/' + file.replace(/\\/g, '\/');
             const mtime:any = stat.mtimeMs;
             files.push({ url, mtime });
           }

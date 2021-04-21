@@ -1,6 +1,7 @@
 
 /* 前后端通信相关的配置,注释只允许使用多行方式 */
 export default {
+    baseUrl:'https://lifeil.com',
     publicDir: 'public',
 
     /* 上传图片配置项 */

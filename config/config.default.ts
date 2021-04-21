@@ -90,6 +90,7 @@ export default (appInfo: EggAppInfo) => {
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH'
   };
   
+  
   // bull config
   config.bull = {
     default: {
@@ -124,7 +125,13 @@ export default (appInfo: EggAppInfo) => {
   // static config
   config.static = {
     prefix: '/static/',
-    dir: path.join(appInfo.baseDir, 'public'),
+    dir:[
+      path.join(appInfo.baseDir, 'public'),
+      {
+        prefix:'/static/',
+        dir: path.join(appInfo.baseDir, 'public/admin/static')
+      }
+    ],
     dynamic: true,
     preload: false,
     // maxAge: 31536000,

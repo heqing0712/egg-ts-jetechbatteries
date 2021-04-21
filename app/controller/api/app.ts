@@ -12,11 +12,21 @@ import { QueryHomeDto } from '../../dto/admin/shop/home';
 import { CreateMessageDto } from '../../dto/admin/shop/Message';
 import { InfoCaseDto, InfoCasexDto, QueryCaseDto } from '../../dto/admin/shop/case';
 import { QueryCaseClassDto } from '../../dto/admin/shop/case_class';
+const fs = require('fs')
+const path = require('path')
+
 import { QueryFaqDto } from '../../dto/admin/shop/faq';
  
 
 export default class AppController extends BaseController {
 
+
+  @Route('/page/admin', 'get')
+  async pageAdmin() {
+    const { ctx } = this
+    ctx.response.type = 'html'
+    ctx.body = fs.readFileSync(path.resolve(__dirname, '../../../public/admin/index.html'))
+  }
 
   @Route('/api/test', 'get')
   async test() {
