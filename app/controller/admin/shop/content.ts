@@ -86,7 +86,7 @@ export default class ShopContentController extends BaseController {
   async info() {
     const dto = await this.ctx.validate<InfoContentDto>(InfoContentDto, this.getQuery());
  
-    const result = await this.service.admin.shop.content.info(dto.id)
+    const result = await this.service.admin.shop.content.info(dto)
     this.res({
       data: result
     })

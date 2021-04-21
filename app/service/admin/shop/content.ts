@@ -1,6 +1,6 @@
 import BaseService from '../../base';
 import * as _ from 'lodash';
-import { CreateContentDto, QueryContentDto, UpdateContentDto } from '../../../dto/admin/shop/content';
+import { CreateContentDto, InfoContentDto, QueryContentDto, UpdateContentDto } from '../../../dto/admin/shop/content';
 // import { In } from 'typeorm';
 
 /**
@@ -72,10 +72,11 @@ export default class ShopContentService extends BaseService {
    * 信息
    * @param id
    */
-  async info(id: number) {
-    const model: any = await this.getRepo().admin.shop.Content.findOne(id);
+  async info(query: InfoContentDto) {
+    const _query = query.id?  {id:query.id}:{identifier:query.identifier}
+    const model: any = await this.getRepo().admin.shop.Content.findOne(_query );
     if (_.isEmpty(model)) {
-      throw new Error('内容id有误');
+      throw new Error('参数有误');
     }
     return { ...model };
   }

@@ -28,25 +28,11 @@ export default class AppController extends BaseController {
     });
   }
 
-  @Route('/api/web/header', 'get')
-  async getHeader() {
-    const data = await this.service.admin.shop.content.info(3)
-    this.res({
-      data: data.content
-    });
-  }
-
-  @Route('/api/web/footer', 'get')
-  async getFooter() {
-    const data = await this.service.admin.shop.content.info(1)
-    this.res({
-      data: data.content
-    });
-  }
+ 
 
   @Route('/api/web/case-banner', 'get')
   async getCaseBanner() {
-    const data = await this.service.admin.shop.content.info(3)
+    const data = await this.service.admin.shop.content.info({identifier:'case-banner',id:0})
     this.res({
       data: data.content
     });
@@ -54,7 +40,7 @@ export default class AppController extends BaseController {
 
   @Route('/api/web/product-banner', 'get')
   async getproductBanner() {
-    const data = await this.service.admin.shop.content.info(1)
+    const data = await this.service.admin.shop.content.info({identifier:'product-banner',id:0})
     this.res({
       data: data.content
     });

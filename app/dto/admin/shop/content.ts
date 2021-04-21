@@ -60,8 +60,18 @@ export class DeleteContentDto {
   }
 
   export class InfoContentDto {
-    @IsInt()
+  
+    @IsOptional()
+    @Allow()
     @Type(() => Number)
+    @Allow()
     @Expose()
     id: number;
+
+    
+    @Allow()
+    @Expose()
+    identifier:string;
   }
+
+ 
