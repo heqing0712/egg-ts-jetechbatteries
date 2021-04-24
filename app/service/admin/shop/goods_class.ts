@@ -20,7 +20,10 @@ export default class ShopGoodsClassService extends BaseService {
    */
   async delete(ids:number[]) {
     await this.getRepo().admin.shop.GoodsClass.delete(ids);
+    await this.service.admin.shop.goods.deleteByGoodsClassIds(ids);
   }
+
+
 
   
   /**
@@ -29,6 +32,7 @@ export default class ShopGoodsClassService extends BaseService {
   async update(model:UpdateGoodsClassDto) {
     await this.getRepo().admin.shop.GoodsClass.update(model.id,model);
   }
+ 
 
   /**
    * 商品分类分页

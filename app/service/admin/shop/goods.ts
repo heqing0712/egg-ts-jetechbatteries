@@ -7,23 +7,34 @@ import ShopGoods from '../../../entities/admin/shop/goods';
 // import { In } from 'typeorm';
 
 /**
- * 系统部门Service
+ * 商品service
  */
 export default class ShopGoodsService extends BaseService {
 
   /**
-   * 修改分类
+   * 修改商品
    */
   async add(model:CreateGoodsDto) {
     await this.getRepo().admin.shop.Goods.insert(model);
   }
 
     /**
-   * 删除分类
+   * 删除商品
    */
   async delete(ids:number[]) {
     await this.getRepo().admin.shop.Goods.delete(ids);
   }
+
+  
+  // 删除分类下的所有商品
+  async deleteByGoodsClassIds(goodsClassIds:number[]){
+    const goodsList = await this.listByGoodsClassIds(goodsClassIds)
+    const goodsIds:number[]  = goodsList.map((d:ShopGoods)=>{ return d.id})
+    if(goodsIds.length){
+      await this.delete(goodsIds)
+    }
+ }
+
 
   
   /**
@@ -78,6 +89,16 @@ export default class ShopGoodsService extends BaseService {
     return resultX;
   }
 
+    /**
+   * 所有
+   */
+     async listByGoodsClassIds(goodsClassIds:number[]) {
+       const result = await this.getRepo().admin.shop.Goods.createQueryBuilder('goods')
+        .andWhere( `goods.categoryId in (${goodsClassIds.join(',')})` )
+        .getMany();
+      return result;
+    }
+  
 
   /**
    * 通过分类url返回分类商品列表
