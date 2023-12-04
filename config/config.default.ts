@@ -6,6 +6,13 @@ import {ValidationError} from 'class-validator';
 export default (appInfo: EggAppInfo) => {
   const config = {} as PowerPartial<EggAppConfig>;
 
+  config.cluster = {
+    listen: {
+      path: '',
+      port: 7002,
+      hostname: '0.0.0.0',
+    }
+};
 
   /**
    * typeorm 配置
@@ -18,7 +25,7 @@ export default (appInfo: EggAppInfo) => {
       port: 3306,
       username: 'root',
       password: '123456',
-      database: 'sf_admin',
+      database: 'sf_admin_jetechenergy',
       synchronize: false,
       logging: true,
       // timezone: '+08:00',
@@ -192,34 +199,7 @@ export default (appInfo: EggAppInfo) => {
     enable: true,
     package: 'egg-cors'
   }
-    /**
-   * typeorm 配置
-   * 文档：https://www.npmjs.com/package/egg-ts-typeorm
-   */
-  config.typeorm = {
-    client: {
-      type: 'mysql',
-      host: '127.0.0.1',
-      port: 3306,
-      username: 'root',
-      password: '123456',
-      database: 'sf_admin',
-      synchronize: false,
-      logging: true,
-      // timezone: '+08:00',
-      /**
-       * JavaScript对数据库中int和bigint的区别对待：
-       * 刚开始开发中，线下测试数据库id字段采用int，数据库SELECT操作返回的结果是Number，但是使用bigint，数据库返回的为String，
-       * 初步猜想是因为bigint的值范围会超过Number，所以采用String。但是这样会对我们业务产生巨大影戏那个，一方面，DTO校验会无法通过，另一方面，问题1中的业务逻辑会受影响。
-       * 经过查找各方文档，解决方案是在数据库连接配置中配置：
-       * "supportBigNumbers": false
-       * 可以配置这个的原因是我们的业务ID距离Number的上线远远达不到，所以可以用这种方式让
-       * bigint也返回Number。
-       * 但是这样配置，TypeOrm插入操作的返回值中的identifiers字段中的id还是String，所以问题1中的处理方式也要对String进行parseInt操作。
-       */
-      supportBigNumbers: false,
-    },
-  };
+
 
   /**
    * redis 配置
